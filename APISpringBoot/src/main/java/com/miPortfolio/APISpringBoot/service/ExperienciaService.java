@@ -4,46 +4,44 @@
  */
 package com.miPortfolio.APISpringBoot.service;
 
-import com.miPortfolio.APISpringBoot.interfaces.IAcercaDe;
-import com.miPortfolio.APISpringBoot.model.AcercaDe;
-import com.miPortfolio.APISpringBoot.repository.AcercaDeRepository;
+import com.miPortfolio.APISpringBoot.interfaces.IExperiencia;
+import com.miPortfolio.APISpringBoot.model.Experiencia;
+import com.miPortfolio.APISpringBoot.repository.ExperienciaRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
-public class AcercaDeService implements IAcercaDe{
-    
-    @Autowired
-    private AcercaDeRepository repository;
 
+@Service
+public class ExperienciaService implements IExperiencia{
+
+    @Autowired 
+    private ExperienciaRepository repository;
+    
     @Override
-    public void saveAcercaDe(AcercaDe acercaDe) {
+    public void saveExperiencia(Experiencia experiencia) {
         
-        repository.save(acercaDe);
+        repository.save(experiencia);
     }
 
-    // aun no encuentro como aplicarlo...
-    
     @Override
-    public void deleteAcercaDeById(Long id) {
+    public void deleteExperienciaById(Long id) {
         
         repository.deleteById(id);
     }
 
     @Override
-    public List<AcercaDe> getAllAcercaDe() {
+    public List<Experiencia> getAllExperiencias() {
         
         return repository.findAll();
     }
 
-   // Deberia tratar de personalizar esta excepcion 
-   
+    // Deberia tratar de personalizar esta excepcion
+    
     @Override
-    public AcercaDe getAcercaDeById(Long id) {
+    public Experiencia getExperienciaById(Long id) {
         
         return repository.findById(id).orElseThrow();
     }
-    
     
 }

@@ -41,12 +41,12 @@ public class UsuarioController {
     
     // Crea
     
-    @PostMapping ("usuario/crear")
+    @PostMapping ("/usuario/crear")
     public String saveUsuarios(@RequestBody Usuario usuario) {
         
         serviceUser.saveUsuario(usuario);
         
-        return "Registro cerrado";
+        return "Registro creado";
     }
     
     

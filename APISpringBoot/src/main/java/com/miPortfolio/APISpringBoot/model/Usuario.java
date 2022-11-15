@@ -2,6 +2,7 @@
 package com.miPortfolio.APISpringBoot.model;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -42,8 +44,13 @@ public class Usuario implements Serializable{
     
     @OneToOne(mappedBy = "usuario_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private AcercaDe acerca;
-
     
+    /*Relacion uno a muchos con clase entity "Experiencia" */
+    
+    @OneToMany (mappedBy = "user",
+                cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Experiencia> exp;  // cambiar a experiencias
+        
     /* Costructores*/
     
     public Usuario() {}

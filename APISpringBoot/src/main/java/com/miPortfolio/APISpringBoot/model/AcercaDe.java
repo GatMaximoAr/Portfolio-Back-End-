@@ -19,6 +19,8 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+
+//proximo inicio de 0 BD custimizar table name
 @Table (name = "acercaDe_usuarios")
 @Entity
 @Getter @Setter

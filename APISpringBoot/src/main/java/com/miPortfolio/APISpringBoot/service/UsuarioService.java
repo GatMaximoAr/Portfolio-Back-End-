@@ -34,7 +34,7 @@ public class UsuarioService implements IUsuario{
         return repository.findAll();
     }
     
-    // Deberia tratar de personilar esta excepcion
+    // Deberia tratar de personalizar esta excepcion
 
     @Override
     public Usuario getUsuarioById(Long id) {
