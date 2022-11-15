@@ -33,6 +33,8 @@ public class UsuarioService implements IUsuario{
     public List<Usuario> getAllUsuarios() {
         return repository.findAll();
     }
+    
+    // Deberia tratar de personilar esta excepcion
 
     @Override
     public Usuario getUsuarioById(Long id) {
