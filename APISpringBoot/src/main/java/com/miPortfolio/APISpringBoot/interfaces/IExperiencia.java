@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IExperiencia {
     
-    public void saveExperiencia(Experiencia usuario);
+    public void saveExperiencia(Experiencia experiencia);
     
     public void deleteExperienciaById(Long id);
     

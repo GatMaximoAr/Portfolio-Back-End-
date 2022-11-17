@@ -63,7 +63,7 @@ public class ExperienciaController {
     //Elimina 1 por id
     
     @DeleteMapping ("/experiencia/delete/{id}")
-    public String deleteUserById(@PathVariable Long id) {
+    public String deleteExpById(@PathVariable Long id) {
         
         expService.deleteExperienciaById(id);
         
