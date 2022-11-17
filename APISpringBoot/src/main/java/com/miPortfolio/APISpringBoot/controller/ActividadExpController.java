@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ActividadExpController {
     
     @Autowired private ActividadExpService ActExpService;
+    
     @Autowired private ExperienciaService expService;
     
    /* @GetMapping ("/booleano")
@@ -43,7 +44,7 @@ public class ActividadExpController {
     /* Si no existe un registro de actividad lo crea y añade a la lista enlaszada
        en experiencia*/
     
-    @PostMapping ("/Activdad/exp/{id}/crear")
+    @PostMapping ("/actividad/exp/{id}/crear")
     public ResponseEntity<ActividadExp> saveActividadExps(@PathVariable Long id,
                                    @RequestBody ActividadExp postAct) {
          

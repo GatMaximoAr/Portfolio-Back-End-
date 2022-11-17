@@ -3,11 +3,16 @@ package com.miPortfolio.APISpringBoot.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -36,6 +41,17 @@ public class Proyecto implements Serializable{
     private Usuario user;
     
     
+    /*Relacion ManyToMany entre Experiencia --> Actividades*/
+    
+    @JoinTable(
+        name = "rel_proyec_imgs",
+            joinColumns = @JoinColumn(name = "FK_proyec"),
+            inverseJoinColumns = @JoinColumn (name = "FK_img"))
+    
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<ImgProyecto> imgs;
+    
+    
     /* Costructores*/
 
     public Proyecto() {
@@ -47,4 +63,12 @@ public class Proyecto implements Serializable{
     }
     
     
+    public void addImg(ImgProyecto img) {
+        
+        this.imgs.add(img);
+    }
+    
+    public void removeObject(ImgProyecto img) {
+        this.imgs.remove(img);
+    }
 }
