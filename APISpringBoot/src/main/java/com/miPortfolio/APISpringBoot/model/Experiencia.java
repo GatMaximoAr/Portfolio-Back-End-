@@ -1,17 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.miPortfolio.APISpringBoot.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import lombok.Getter;
@@ -47,6 +49,30 @@ public class Experiencia implements Serializable{
     @ManyToOne
     @JoinColumn (name = "usuario_id")
     private Usuario user;
+    
+    
+   /*Relacion ManyToMany entre Experiencia --> Actividades*/
+    
+    @JoinTable(
+        name = "rel_exps_acts",
+            joinColumns = @JoinColumn(name = "FK_exp"),
+            inverseJoinColumns = @JoinColumn (name = "FK_act"))
+    
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<ActividadExp> actividad;
+    
+    
+    
+    /*Metodos: agregar y remover, coleccion de Actividades*/
+    
+    public void addActividad(ActividadExp act) {
+        
+        this.actividad.add(act);
+    }
+    
+    public void removeObject(ActividadExp actividad) {
+        this.actividad.remove(actividad);
+    }
     
     /* Costructores*/
     
