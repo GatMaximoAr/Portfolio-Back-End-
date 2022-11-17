@@ -52,12 +52,18 @@ public class Usuario implements Serializable{
     private Set<Experiencia> exp;  // cambiar a experiencias
     
     
-    /*Relacion uno a muchos con clase entity "Experiencia" */
+    /*Relacion uno a muchos con clase entity "Educacion" */
     
     @OneToMany (mappedBy = "user",
                 cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Educacion> formaciones;
-        
+    
+    /*Relacion uno a muchos con clase entity "Proyecto" */
+    
+    
+        @OneToMany (mappedBy = "user",
+                cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+        private Set<Proyecto> proyectos;
     
     /* Costructores*/
     

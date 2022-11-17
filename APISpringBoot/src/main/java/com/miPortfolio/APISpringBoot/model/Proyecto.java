@@ -3,7 +3,6 @@ package com.miPortfolio.APISpringBoot.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,24 +15,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 
-@Table (name = "formaciones")
+@Table (name = "proyectos")
 @Setter @Getter
 @Entity
-public class Educacion implements Serializable{
+public class Proyecto implements Serializable{
     
     @Id
-    @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "educacion_generator")
-    @SequenceGenerator (name = "educacion_generator", sequenceName = "educacion_sq", initialValue = 1)
+    @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "proyecto_generator")
+    @SequenceGenerator (name = "proyecto_generator", sequenceName = "proyecto_sq", initialValue = 1)
     private Long id;
     
-    @Column (name = "titulo")
-    private String titulo_des;
-    
-    private String imagen;
-    
-    @Column (columnDefinition = "TEXT")
-    private String sobre_educacion;
-    
+    private String titulo;
     
     /*Relacion muchos a uno con clase entity "Usuario" */
     
@@ -42,17 +34,17 @@ public class Educacion implements Serializable{
     @ManyToOne
     @JoinColumn (name = "usuario_id")
     private Usuario user;
-
-    /* Costructores*/
     
-    public Educacion() {
+    
+    /* Costructores*/
+
+    public Proyecto() {
     }
 
-    public Educacion(String titulo_des, String imagen, String sobre_educacion, Usuario user) {
-        this.titulo_des = titulo_des;
-        this.imagen = imagen;
-        this.sobre_educacion = sobre_educacion;
+    public Proyecto(String titulo, Usuario user) {
+        this.titulo = titulo;
         this.user = user;
     }
-
+    
+    
 }

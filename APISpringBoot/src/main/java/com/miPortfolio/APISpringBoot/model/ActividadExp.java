@@ -38,6 +38,8 @@ public class ActividadExp implements Serializable{
     private Set<Experiencia> exps;
 
     
+    /* Costructores*/
+    
     public ActividadExp() {
     }
 
