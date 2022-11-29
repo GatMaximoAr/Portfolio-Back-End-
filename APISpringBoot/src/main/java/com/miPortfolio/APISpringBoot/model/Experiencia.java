@@ -2,6 +2,7 @@
 package com.miPortfolio.APISpringBoot.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -47,7 +48,7 @@ public class Experiencia implements Serializable{
     
     /*Relacion muchos a uno con clase entity "Usuario" */
 
-    @JsonBackReference  //Serializacion "Json de referencia"
+    //@JsonManagedReference(value = "userxp") //Serializacion "Json de referencia"
     @ManyToOne
     @JoinColumn (name = "usuario_id")
     private Usuario user;
@@ -60,6 +61,7 @@ public class Experiencia implements Serializable{
             joinColumns = @JoinColumn(name = "FK_exp"),
             inverseJoinColumns = @JoinColumn (name = "FK_act"))
     
+    //@JsonBackReference(value = "act")
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ActividadExp> actividad;
     

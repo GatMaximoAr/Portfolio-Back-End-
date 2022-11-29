@@ -2,6 +2,7 @@
 package com.miPortfolio.APISpringBoot.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Column;
@@ -33,7 +34,7 @@ public class ActividadExp implements Serializable{
     
     /*Relacion ManyToMany entre Actividad --> Experiencia*/
     
-    @JsonBackReference          //Serialzacion Json
+    @JsonBackReference(value = "expAc")          //Serialzacion Json
     @ManyToMany (mappedBy = "actividad")
     private Set<Experiencia> exps;
 

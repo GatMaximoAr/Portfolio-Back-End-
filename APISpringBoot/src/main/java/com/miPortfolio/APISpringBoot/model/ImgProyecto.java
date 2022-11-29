@@ -2,6 +2,7 @@
 package com.miPortfolio.APISpringBoot.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Entity;
@@ -34,7 +35,8 @@ public class ImgProyecto implements Serializable{
     
     /*Relacion ManyToMany entre Actividad --> Experiencia*/
     
-    @JsonBackReference          //Serialzacion Json
+    //@JsonManagedReference
+    @JsonBackReference(value = "imgpro")          //Serialzacion Json
     @ManyToMany (mappedBy = "imgs")
     private Set<Proyecto> proyectos;
 

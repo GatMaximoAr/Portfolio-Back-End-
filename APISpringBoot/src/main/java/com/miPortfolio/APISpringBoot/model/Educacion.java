@@ -2,6 +2,7 @@
 package com.miPortfolio.APISpringBoot.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,7 +41,7 @@ public class Educacion implements Serializable{
     /*Relacion muchos a uno con clase entity "Usuario" */
     
     
-    @JsonBackReference  //Serializacion "Json de referencia"
+    //@JsonManagedReference(value = "eduUser")  //Serializacion "Json de referencia"
     @ManyToOne
     @JoinColumn (name = "usuario_id")
     private Usuario user;

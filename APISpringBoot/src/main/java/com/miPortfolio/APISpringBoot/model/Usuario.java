@@ -1,6 +1,7 @@
 
 package com.miPortfolio.APISpringBoot.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -42,11 +43,13 @@ public class Usuario implements Serializable{
     
     /* Relacion 1-1 con clase entidad "AcercaDe", (no fuciona como quisiera)  */
     
+    @JsonBackReference
     @OneToOne(mappedBy = "usuario_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private AcercaDe acerca;
     
     /*Relacion uno a muchos con clase entity "Experiencia" */
     
+    @JsonBackReference (value = "experiencia")
     @OneToMany (mappedBy = "user",
                 cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Experiencia> exp;  // cambiar a experiencias
@@ -54,16 +57,17 @@ public class Usuario implements Serializable{
     
     /*Relacion uno a muchos con clase entity "Educacion" */
     
+    @JsonBackReference (value = "formaciones")
     @OneToMany (mappedBy = "user",
                 cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Educacion> formaciones;
     
     /*Relacion uno a muchos con clase entity "Proyecto" */
     
-    
-        @OneToMany (mappedBy = "user",
+    @JsonBackReference (value = "proyectos")
+    @OneToMany (mappedBy = "user",
                 cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-        private Set<Proyecto> proyectos;
+    private Set<Proyecto> proyectos;
     
     /* Costructores*/
     

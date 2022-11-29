@@ -2,6 +2,7 @@
 package com.miPortfolio.APISpringBoot.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -53,7 +54,6 @@ public class AcercaDe implements Serializable{
         se puede borrar unicamente el registro AcercaDe asociado, depende de 
         la existencia de father) children */
     
-    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario_id;
