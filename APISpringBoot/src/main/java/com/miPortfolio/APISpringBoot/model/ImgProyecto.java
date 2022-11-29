@@ -28,6 +28,10 @@ public class ImgProyecto implements Serializable{
     
     private String imagen;
     
+    private String nombre_img;
+    
+    private String viculo_img;
+    
     /*Relacion ManyToMany entre Actividad --> Experiencia*/
     
     @JsonBackReference          //Serialzacion Json
@@ -39,9 +43,15 @@ public class ImgProyecto implements Serializable{
     public ImgProyecto() {
     }
 
-    public ImgProyecto(String imagen) {
+    public ImgProyecto(String imagen, String nombre_img, String viculo_img) {
         this.imagen = imagen;
+        this.nombre_img = nombre_img;
+        this.viculo_img = viculo_img;
     }
+
+    
+
+    
     
     
 }

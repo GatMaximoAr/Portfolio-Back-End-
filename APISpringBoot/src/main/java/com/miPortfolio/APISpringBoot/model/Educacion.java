@@ -31,6 +31,8 @@ public class Educacion implements Serializable{
     
     private String imagen;
     
+    private String vinculo_img;
+    
     @Column (columnDefinition = "TEXT")
     private String sobre_educacion;
     
@@ -48,11 +50,14 @@ public class Educacion implements Serializable{
     public Educacion() {
     }
 
-    public Educacion(String titulo_des, String imagen, String sobre_educacion, Usuario user) {
+    public Educacion(String titulo_des, String imagen, String vinculo_img, String sobre_educacion, Usuario user) {
         this.titulo_des = titulo_des;
         this.imagen = imagen;
+        this.vinculo_img = vinculo_img;
         this.sobre_educacion = sobre_educacion;
         this.user = user;
     }
+
+    
 
 }

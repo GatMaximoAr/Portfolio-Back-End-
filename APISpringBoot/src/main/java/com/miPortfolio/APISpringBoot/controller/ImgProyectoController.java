@@ -68,7 +68,7 @@ public class ImgProyectoController {
         }else if (imgService.verificaExistenciaImg(pro.getImgs(), imgService.getAllImgProyectos()) ) {
        
             
-            return new ResponseEntity<>(new ImgProyecto("ya existe un registro con ese nombre, en el proyecto indicado"), HttpStatus.CONFLICT);
+            return new ResponseEntity<>(new ImgProyecto("ya existe un registro con ese nombre, en el proyecto indicado", "", ""), HttpStatus.CONFLICT);
         }else {
             
             // Si existe la imgs solo la agrega a la lista en proyecto
@@ -78,7 +78,7 @@ public class ImgProyectoController {
             
             proService.saveProyecto(pro);
             
-            return new ResponseEntity<>(new ImgProyecto("ya existe un registro con ese nombre, Agregado a proyecto"), HttpStatus.CONFLICT);
+            return new ResponseEntity<>(new ImgProyecto("ya existe un registro con ese nombre, Agregado a proyecto", "", ""), HttpStatus.CONFLICT);
         }
          
     }
@@ -131,11 +131,17 @@ public class ImgProyectoController {
     
     @PutMapping ("/imagen/editar/{id}")
     public ResponseEntity<ImgProyecto>editarImgProyecto(@PathVariable Long id,
-                                                @RequestParam String imagen) {
+                                                @RequestParam String imagen,
+                                                @RequestParam String nombre_img,
+                                                @RequestParam String vinculo_img) {
         
         
         ImgProyecto editImg = imgService.getImgProyectoById(id);
+        
         editImg.setImagen(imagen);
+        editImg.setNombre_img(nombre_img);
+        editImg.setViculo_img(vinculo_img);
+        
         imgService.saveImgProyecto(editImg);
         
         

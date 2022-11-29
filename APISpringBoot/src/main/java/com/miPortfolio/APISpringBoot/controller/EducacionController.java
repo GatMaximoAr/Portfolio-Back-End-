@@ -72,12 +72,14 @@ public class EducacionController {
     public ResponseEntity<Educacion>editarEducacion(@PathVariable Long id,
                                                 @RequestParam String titulo_des,
                                                 @RequestParam String imagen,
+                                                @RequestParam String vinculo_img,
                                                 @RequestParam String sobre_educacion) {
         
         
         Educacion editEdu = eduService.getEducacionById(id);
         editEdu.setTitulo_des(titulo_des);
         editEdu.setImagen(imagen);
+        editEdu.setVinculo_img(vinculo_img);
         editEdu.setSobre_educacion(sobre_educacion);
         
         eduService.saveEducacion(editEdu);

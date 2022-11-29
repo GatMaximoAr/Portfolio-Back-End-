@@ -40,6 +40,8 @@ public class Experiencia implements Serializable{
     @Column(name ="imgen_experiencia" )
     private String img_experiencia;
     
+    private String img_href;
+    
     @Column(columnDefinition = "TEXT")
     private String sobre_experiencia;
     
@@ -79,13 +81,11 @@ public class Experiencia implements Serializable{
     public Experiencia() {
     }
 
-    public Experiencia(String img_experiencia, String sobre_experiencia, Usuario user) {
+    public Experiencia(String img_experiencia, String img_href, String sobre_experiencia, Usuario user) {
         this.img_experiencia = img_experiencia;
+        this.img_href = img_href;
         this.sobre_experiencia = sobre_experiencia;
         this.user = user;
-    }
-
-    
-    
+    }  
     
 }

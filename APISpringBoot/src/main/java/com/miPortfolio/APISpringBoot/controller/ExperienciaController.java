@@ -75,12 +75,16 @@ public class ExperienciaController {
     @PutMapping ("/experiencia/editar/{id}")
     public ResponseEntity<Experiencia>editarExperiencia(@PathVariable Long id,
                                                 @RequestParam String img_experiencia,
+                                                @RequestParam String img_href,
                                                 @RequestParam String sobre_experiencia) {
         
         
         Experiencia editExp = expService.getExperienciaById(id);
+        
         editExp.setImg_experiencia(img_experiencia);
+        editExp.setImg_href(img_href);
         editExp.setSobre_experiencia(sobre_experiencia);
+        
         expService.saveExperiencia(editExp);
         
         
