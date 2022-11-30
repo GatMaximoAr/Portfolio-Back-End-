@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import lombok.Getter;
 import lombok.Setter;
@@ -56,27 +57,23 @@ public class Experiencia implements Serializable{
     
    /*Relacion ManyToMany entre Experiencia --> Actividades*/
     
-    @JoinTable(
-        name = "rel_exps_acts",
-            joinColumns = @JoinColumn(name = "FK_exp"),
-            inverseJoinColumns = @JoinColumn (name = "FK_act"))
     
     //@JsonBackReference(value = "act")
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<ActividadExp> actividad;
+    @OneToMany(mappedBy = "experiencia", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<RelExpAct> relaciones;
     
     
     
     /*Metodos: agregar y remover, coleccion de Actividades*/
     
-    public void addActividad(ActividadExp act) {
+  /*  public void addActividad(ActividadExp act) {
         
         this.actividad.add(act);
     }
     
     public void removeObject(ActividadExp actividad) {
         this.actividad.remove(actividad);
-    }
+    } */
     
     /* Costructores*/
     

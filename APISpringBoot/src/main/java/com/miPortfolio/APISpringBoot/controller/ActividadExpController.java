@@ -44,36 +44,36 @@ public class ActividadExpController {
     /* Si no existe un registro de actividad lo crea y añade a la lista enlaszada
        en experiencia*/
     
-    @PostMapping ("/actividad/exp/{id}/crear")
-    public ResponseEntity<ActividadExp> saveActividadExps(@PathVariable Long id,
+    @PostMapping ("/actividad/exp/crear")
+    public ResponseEntity<ActividadExp> saveActividadExps(//@PathVariable Long id
                                    @RequestBody ActividadExp postAct) {
          
         /* Busca la experiencia en base al id que recibe, puede lanzar una excepcion*/
         
-            Experiencia exp = expService.getExperienciaById(id);
+            //Experiencia exp = expService.getExperienciaById(id);
             
             /* Si no existe un registro de actividad lo crea y añade a la lista enlaszada
             en experiencia*/
             
         if (!ActExpService.existByActividad(postAct.getActividad()) ) {
             
-            exp.addActividad(postAct);
+           // exp.addActividad(postAct);
         
             ActExpService.saveActividadExp(postAct);
             return new ResponseEntity<>(postAct, HttpStatus.OK);
        
             
             /*Si el registro existe en ambos extremos no hace nada */
-        }else if (ActExpService.verificaExistenciaAct(exp.getActividad(), ActExpService.getAllActividadExps()) ) {
+        }/*else if (ActExpService.verificaExistenciaAct(exp.getActividad(), ActExpService.getAllActividadExps()) ) {
        
             
             return new ResponseEntity<>(new ActividadExp("ya existe un registro con ese nombre, en la experiencia indicada"), HttpStatus.CONFLICT);
-        }else {
+        }*/else {
             
             // Si existe la actividad solo la agrega a la lista en experiencia
              ActividadExp existAct = ActExpService.findByActividad(postAct.getActividad());
             
-            exp.addActividad(existAct);
+            //exp.addActividad(existAct);
             
             return new ResponseEntity<>(new ActividadExp("ya existe un registro con ese nombre, Agregado a experiencia"), HttpStatus.CONFLICT);
         }
@@ -117,7 +117,7 @@ public class ActividadExpController {
         
         Experiencia exp = expService.getExperienciaById(idExp);
         
-        exp.removeObject(act);
+        //exp.removeObject(act);
         
         expService.saveExperiencia(exp);
         

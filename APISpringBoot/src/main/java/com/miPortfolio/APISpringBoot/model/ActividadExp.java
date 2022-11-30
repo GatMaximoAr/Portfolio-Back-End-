@@ -5,12 +5,15 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.Getter;
@@ -34,9 +37,9 @@ public class ActividadExp implements Serializable{
     
     /*Relacion ManyToMany entre Actividad --> Experiencia*/
     
-    @JsonBackReference(value = "expAc")          //Serialzacion Json
-    @ManyToMany (mappedBy = "actividad")
-    private Set<Experiencia> exps;
+    //@JsonBackReference(value = "expAc")          //Serialzacion Json
+    @OneToMany (mappedBy = "actividadExp", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<RelExpAct> relaciones;
 
     
     /* Costructores*/
