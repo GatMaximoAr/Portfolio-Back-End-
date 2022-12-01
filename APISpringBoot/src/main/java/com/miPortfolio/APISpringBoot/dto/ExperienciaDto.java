@@ -4,7 +4,9 @@
  */
 package com.miPortfolio.APISpringBoot.dto;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +21,7 @@ public class ExperienciaDto {
     
     private String sobre_experiencia;
     
-    private List<String> actividad;
+    private Set<String> actividad = new HashSet<>();
 
     public ExperienciaDto() {
     }
@@ -31,5 +33,8 @@ public class ExperienciaDto {
         this.sobre_experiencia = sobre_experiencia;
     }
     
-    
+    public void addActividad(String Act) {
+        
+        this.actividad.add(Act);
+    }
 }
