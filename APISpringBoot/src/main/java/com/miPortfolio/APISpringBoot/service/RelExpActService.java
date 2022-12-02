@@ -5,6 +5,7 @@
 package com.miPortfolio.APISpringBoot.service;
 
 import com.miPortfolio.APISpringBoot.model.RelExpAct;
+import com.miPortfolio.APISpringBoot.model.RelExpActKey;
 import com.miPortfolio.APISpringBoot.repository.RelExpActRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,10 @@ public class RelExpActService {
     public List<RelExpAct> findAllRelaciones() {
         
         return repostory.findAll();
+    }
+    
+    public void deleteById(RelExpActKey key) {
+        
+        repostory.deleteById(key);
     }
 }

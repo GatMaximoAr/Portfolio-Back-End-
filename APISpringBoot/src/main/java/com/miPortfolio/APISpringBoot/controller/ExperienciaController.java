@@ -4,6 +4,7 @@
  */
 package com.miPortfolio.APISpringBoot.controller;
 
+import com.miPortfolio.APISpringBoot.logica.Mensaje;
 import com.miPortfolio.APISpringBoot.model.Experiencia;
 import com.miPortfolio.APISpringBoot.model.Usuario;
 import com.miPortfolio.APISpringBoot.service.ExperienciaService;
@@ -12,6 +13,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 /* Controler de end point usuario */
 
+
+@CrossOrigin (origins = "http://localhost:4200/")
 @RestController
 public class ExperienciaController {
     
@@ -63,11 +67,11 @@ public class ExperienciaController {
     //Elimina 1 por id
     
     @DeleteMapping ("/experiencia/delete/{id}")
-    public String deleteExpById(@PathVariable Long id) {
+    public ResponseEntity<Mensaje> deleteExpById(@PathVariable Long id) {
         
         expService.deleteExperienciaById(id);
         
-        return "Experiencia elimanado";
+        return new ResponseEntity<>(new Mensaje("Recurso eliminado"), HttpStatus.OK);
     }
     
     //Edita 1 por id 
