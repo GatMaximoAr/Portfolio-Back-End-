@@ -30,6 +30,7 @@ public class Educacion implements Serializable{
     @Column (name = "titulo")
     private String titulo_des;
     
+    @Column (columnDefinition = "TEXT")
     private String imagen;
     
     private String vinculo_img;

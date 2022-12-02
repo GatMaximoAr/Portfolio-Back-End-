@@ -1,6 +1,10 @@
 
 package com.miPortfolio.APISpringBoot.controller;
 
+import com.miPortfolio.APISpringBoot.dao.EducacionDao;
+import com.miPortfolio.APISpringBoot.dto.EducacionDto;
+import com.miPortfolio.APISpringBoot.logica.LogicaEducacion;
+import com.miPortfolio.APISpringBoot.logica.Mensaje;
 import com.miPortfolio.APISpringBoot.model.Educacion;
 import com.miPortfolio.APISpringBoot.model.Usuario;
 import com.miPortfolio.APISpringBoot.service.EducacionService;
@@ -28,27 +32,27 @@ public class EducacionController {
     
     @Autowired private UsuarioService userService;
     
+    @Autowired private LogicaEducacion logicaEdu;
+    
     // Crea
     
     @PostMapping ("/educacion/usuario/{id}/crear")
-    public ResponseEntity<Educacion> saveEducacion(@PathVariable Long id,
-                                   @RequestBody Educacion postEdu) {
+    public ResponseEntity<Mensaje> saveEducacion(@PathVariable Long id,
+                                   @RequestBody EducacionDao dao) {
                                    
         Usuario user = userService.getUsuarioById(id);
-        postEdu.setUser(user);
         
-        eduService.saveEducacion(postEdu);
         
-        return new ResponseEntity<>(postEdu, HttpStatus.OK);
+        return logicaEdu.crearItemEducacion(dao, user);
     }
     
     
     //Trae todos
     
     @GetMapping ("/educacion/traer")
-    public List<Educacion> getAllFormaciones() {
+    public List<EducacionDto> getAllFormaciones() {
         
-        return eduService.getAllFormaciones();
+        return logicaEdu.getListEducacion();
     }
     
     //Trae 1 por id
