@@ -48,4 +48,21 @@ public class LogicaEducacion {
         
         return new ResponseEntity<>(new Mensaje("Item Educacion creado"), HttpStatus.CREATED);
     }
+    
+    public ResponseEntity<EducacionDto> modificaEducacion(Educacion edu, EducacionDao dao) {
+        
+        
+        edu.setTitulo_des(dao.getTitulo_des());
+        edu.setImagen(dao.getImagen());
+        edu.setVinculo_img(dao.getVinculo_img());
+        edu.setSobre_educacion(dao.getSobre_educacion());
+        
+        eduService.saveEducacion(edu);
+        
+        EducacionDto eduDto = new EducacionDto(edu.getId(), edu.getTitulo_des(),
+                edu.getImagen(), edu.getVinculo_img(),
+                edu.getSobre_educacion());
+        
+        return new ResponseEntity<>(eduDto, HttpStatus.OK);
+    }
 }

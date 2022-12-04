@@ -11,7 +11,6 @@ import com.miPortfolio.APISpringBoot.service.EducacionService;
 import com.miPortfolio.APISpringBoot.service.UsuarioService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -76,22 +74,12 @@ public class EducacionController {
     //Edita 1 por id 
     
     @PutMapping ("/educacion/editar/{id}")
-    public ResponseEntity<Educacion>editarEducacion(@PathVariable Long id,
-                                                @RequestParam String titulo_des,
-                                                @RequestParam String imagen,
-                                                @RequestParam String vinculo_img,
-                                                @RequestParam String sobre_educacion) {
+    public ResponseEntity<EducacionDto>editarEducacion(@PathVariable Long id,
+                                                    @RequestBody EducacionDao dao) {
+        
+        Educacion edu = eduService.getEducacionById(id);
         
         
-        Educacion editEdu = eduService.getEducacionById(id);
-        editEdu.setTitulo_des(titulo_des);
-        editEdu.setImagen(imagen);
-        editEdu.setVinculo_img(vinculo_img);
-        editEdu.setSobre_educacion(sobre_educacion);
-        
-        eduService.saveEducacion(editEdu);
-        
-        
-        return new ResponseEntity<>(editEdu, HttpStatus.OK);
+        return logicaEdu.modificaEducacion(edu, dao);
     }
 }
