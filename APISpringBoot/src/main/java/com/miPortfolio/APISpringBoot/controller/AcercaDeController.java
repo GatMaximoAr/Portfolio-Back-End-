@@ -4,6 +4,9 @@
  */
 package com.miPortfolio.APISpringBoot.controller;
 
+import com.miPortfolio.APISpringBoot.dao.AcercaDeDao;
+import com.miPortfolio.APISpringBoot.dto.AcercaDeDto;
+import com.miPortfolio.APISpringBoot.logica.LogicaAcercaDe;
 import com.miPortfolio.APISpringBoot.service.AcercaDeService;
 import com.miPortfolio.APISpringBoot.model.AcercaDe;
 import com.miPortfolio.APISpringBoot.model.Usuario;
@@ -33,20 +36,19 @@ public class AcercaDeController {
     // 2 injecciones necesarias
     
     @Autowired private AcercaDeService serviceAcerca;
+    
     @Autowired private UsuarioService serviceUsuario;
+    
+    @Autowired private LogicaAcercaDe logicaAcercaDe;
     
     //Crea si no hay registros, else Mensaje
     
     @PostMapping ("acerca/usuario/{id}/crear")
-    public String saveUsuarios(@PathVariable Long id, @RequestBody AcercaDe acerca) {
+    public ResponseEntity<AcercaDeDto> saveUsuarios(@PathVariable Long id, @RequestBody AcercaDeDao dao) {
         
         Usuario user = serviceUsuario.getUsuarioById(id);
         
-        acerca.setUsuario(user);
-        
-        serviceAcerca.saveAcercaDe(acerca);
-        
-        return "Acerca creado";
+        return logicaAcercaDe.crearAcerca(dao, user);
     }
     
     //Trae todos

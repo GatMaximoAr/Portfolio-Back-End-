@@ -71,14 +71,17 @@ public class AcercaDe implements Serializable{
     public AcercaDe() {
     }
 
-    public AcercaDe(String nombre_usuario, String apellido_usuario, String imagen, String sobre_usuario, String ocupacion, String img_portada) {
+    public AcercaDe(String nombre_usuario, String apellido_usuario, String imagen, String sobre_usuario, String ocupacion, String img_portada, Usuario usuario) {
         this.nombre_usuario = nombre_usuario;
         this.apellido_usuario = apellido_usuario;
         this.imagen = imagen;
         this.sobre_usuario = sobre_usuario;
         this.ocupacion = ocupacion;
         this.img_portada = img_portada;
+        this.usuario = usuario;
     }
+
+    
 
     
 
