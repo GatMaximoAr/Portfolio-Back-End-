@@ -25,7 +25,6 @@ public class AcercaDeService implements IAcercaDe{
         repository.save(acercaDe);
     }
 
-    // aun no encuentro como aplicarlo...
     
     @Override
     public void deleteAcercaDeById(Long id) {

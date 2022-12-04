@@ -43,9 +43,7 @@ public class Usuario implements Serializable{
     
     /* Relacion 1-1 con clase entidad "AcercaDe", (no fuciona como quisiera)  */
     
-    @JsonBackReference
-    @OneToOne(mappedBy = "usuario_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private AcercaDe acerca;
+  
     
     /*Relacion uno a muchos con clase entity "Experiencia" */
     

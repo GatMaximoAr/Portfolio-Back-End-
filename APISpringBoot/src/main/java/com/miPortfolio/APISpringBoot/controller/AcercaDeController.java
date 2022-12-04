@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,19 +42,11 @@ public class AcercaDeController {
         
         Usuario user = serviceUsuario.getUsuarioById(id);
         
-        if (user.getAcerca() == null) {
-            
-            acerca.setUsuario_id(user);
-            
-            serviceAcerca.saveAcercaDe(acerca);
-            
-            return "No habia registros, registro creado";
-        }else {
-            
-            return "Error: un usuario solo puede tener un 'acerca de'"
-                    + "Modifique o borre el existente, para continuar";
-        } 
+        acerca.setUsuario(user);
         
+        serviceAcerca.saveAcercaDe(acerca);
+        
+        return "Acerca creado";
     }
     
     //Trae todos
@@ -72,6 +65,7 @@ public class AcercaDeController {
         return serviceAcerca.getAcercaDeById(id);
     }
     
+    
     //edita 1 por id 
     
     @PutMapping ("/acerca/editar/{id}")
@@ -80,7 +74,8 @@ public class AcercaDeController {
                                @RequestParam String apellido_usuario,
                                @RequestParam String imagen,
                                @RequestParam String sobre_usuario,
-                               @RequestParam String ocupacion) {
+                               @RequestParam String ocupacion,
+                               @RequestParam String img_portada) {
         
         
         
@@ -91,8 +86,19 @@ public class AcercaDeController {
         editAcerca.setImagen(imagen);
         editAcerca.setSobre_usuario(sobre_usuario);
         editAcerca.setOcupacion(ocupacion);
+        editAcerca.setImg_portada(img_portada);
+        
         serviceAcerca.saveAcercaDe(editAcerca);
         
         return new ResponseEntity<>(editAcerca, HttpStatus.OK);
+    }
+    
+    
+    @DeleteMapping ("/delete/acerca/{id}")
+    public String deleteAcercaDe(@PathVariable Long id) {
+        
+        serviceAcerca.deleteAcercaDeById(id);
+        
+        return "Acerca de eliminado";
     }
 }

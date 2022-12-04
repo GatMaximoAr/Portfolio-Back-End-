@@ -6,10 +6,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -31,7 +33,7 @@ public class AcercaDe implements Serializable{
     @Id
     @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "acercaDe_generator")
     @SequenceGenerator (name = "acercaDe_generator", sequenceName = "acercaDe_sq")
-    private Long id_acercaDe;
+    private Long id;
     
     /* Nombre de las columnas customizado*/
     
@@ -41,7 +43,7 @@ public class AcercaDe implements Serializable{
     @Column (name = "apellido")
     private String apellido_usuario;
     
-    @Column (name = "imagem")
+    @Column (name = "imagen_perfil")
     private String imagen;
     
     @Column (columnDefinition = "TEXT", name = "sobre_usuario")
@@ -49,27 +51,36 @@ public class AcercaDe implements Serializable{
     
     @Column (name = "ocupacion")
     private String ocupacion;
+
+    @Column (name = "portada")
+    private String img_portada;
+    
     
     /* Relacion 1-1 con clase entidad "Usuario", (no fuciona como quisiera: no se
         se puede borrar unicamente el registro AcercaDe asociado, depende de 
         la existencia de father) children */
     
-    @OneToOne
+    @JsonBackReference
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
     @JoinColumn(name = "id_usuario")
-    private Usuario usuario_id;
+    private Usuario usuario;
 
     /* Costructores*/
     
     public AcercaDe() {
     }
 
-    public AcercaDe(String nombre_usuario, String apellido_usuario, String imagen, String sobre_usuario, String ocupacion) {
+    public AcercaDe(String nombre_usuario, String apellido_usuario, String imagen, String sobre_usuario, String ocupacion, String img_portada) {
         this.nombre_usuario = nombre_usuario;
         this.apellido_usuario = apellido_usuario;
         this.imagen = imagen;
         this.sobre_usuario = sobre_usuario;
         this.ocupacion = ocupacion;
+        this.img_portada = img_portada;
     }
+
+    
 
     
     
