@@ -33,4 +33,18 @@ public class LogicaAcercaDe {
         
         return new ResponseEntity<>(acercaDto, HttpStatus.CREATED);
     }
+    
+    public ResponseEntity<Mensaje> editAcerca(AcercaDeDao dao, AcercaDe acercaDe) {
+        
+     acercaDe.setNombre_usuario(dao.getNombre_usuario());
+     acercaDe.setApellido_usuario(dao.getApellido_usuario());
+     acercaDe.setImagen(dao.getImagen());
+     acercaDe.setSobre_usuario(dao.getSobre_usuario());
+     acercaDe.setOcupacion(dao.getOcupacion());
+     acercaDe.setImg_portada(dao.getImg_portada());
+     
+     acercaService.saveAcercaDe(acercaDe);
+        
+        return new ResponseEntity<>(new Mensaje("Acerca de, Editado"), HttpStatus.OK);
+    }
 }

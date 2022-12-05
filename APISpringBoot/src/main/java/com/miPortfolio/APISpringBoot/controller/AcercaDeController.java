@@ -7,6 +7,7 @@ package com.miPortfolio.APISpringBoot.controller;
 import com.miPortfolio.APISpringBoot.dao.AcercaDeDao;
 import com.miPortfolio.APISpringBoot.dto.AcercaDeDto;
 import com.miPortfolio.APISpringBoot.logica.LogicaAcercaDe;
+import com.miPortfolio.APISpringBoot.logica.Mensaje;
 import com.miPortfolio.APISpringBoot.service.AcercaDeService;
 import com.miPortfolio.APISpringBoot.model.AcercaDe;
 import com.miPortfolio.APISpringBoot.model.Usuario;
@@ -71,36 +72,21 @@ public class AcercaDeController {
     //edita 1 por id 
     
     @PutMapping ("/acerca/editar/{id}")
-    public ResponseEntity<AcercaDe> editAcercaDe(@PathVariable Long id,
-                               @RequestParam String nombre_usuario,
-                               @RequestParam String apellido_usuario,
-                               @RequestParam String imagen,
-                               @RequestParam String sobre_usuario,
-                               @RequestParam String ocupacion,
-                               @RequestParam String img_portada) {
-        
-        
+    public ResponseEntity<Mensaje> editAcercaDe(@PathVariable Long id,
+                                                 @RequestBody AcercaDeDao dao) {
         
         AcercaDe editAcerca = serviceAcerca.getAcercaDeById(id);
         
-        editAcerca.setNombre_usuario(nombre_usuario);
-        editAcerca.setApellido_usuario(apellido_usuario);
-        editAcerca.setImagen(imagen);
-        editAcerca.setSobre_usuario(sobre_usuario);
-        editAcerca.setOcupacion(ocupacion);
-        editAcerca.setImg_portada(img_portada);
         
-        serviceAcerca.saveAcercaDe(editAcerca);
-        
-        return new ResponseEntity<>(editAcerca, HttpStatus.OK);
+        return logicaAcercaDe.editAcerca(dao, editAcerca);
     }
     
     
     @DeleteMapping ("/delete/acerca/{id}")
-    public String deleteAcercaDe(@PathVariable Long id) {
+    public ResponseEntity<Mensaje> deleteAcercaDe(@PathVariable Long id) {
         
         serviceAcerca.deleteAcercaDeById(id);
         
-        return "Acerca de eliminado";
+        return new ResponseEntity<>(new Mensaje("Acerca de eliminado"), HttpStatus.OK);
     }
 }
