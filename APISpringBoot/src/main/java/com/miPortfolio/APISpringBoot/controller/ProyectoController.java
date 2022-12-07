@@ -4,6 +4,10 @@
  */
 package com.miPortfolio.APISpringBoot.controller;
 
+import com.miPortfolio.APISpringBoot.dao.ProyectoDao;
+import com.miPortfolio.APISpringBoot.dto.ProyectoDto;
+import com.miPortfolio.APISpringBoot.logica.LogicaProyecto;
+import com.miPortfolio.APISpringBoot.logica.Mensaje;
 import com.miPortfolio.APISpringBoot.model.Proyecto;
 import com.miPortfolio.APISpringBoot.model.Usuario;
 import com.miPortfolio.APISpringBoot.service.ProyectoService;
@@ -31,27 +35,27 @@ public class ProyectoController {
     
     @Autowired private UsuarioService userService;
     
+    @Autowired private LogicaProyecto logicaService;
+    
     // Crea
     
     @PostMapping ("/proyecto/usuario/{id}/crear")
-    public ResponseEntity<Proyecto> saveProyecto(@PathVariable Long id,
-                                   @RequestBody Proyecto postProyec) {
+    public ResponseEntity<ProyectoDto> saveProyecto(@PathVariable Long id,
+                                   @RequestBody ProyectoDao dao) {
                                    
         Usuario user = userService.getUsuarioById(id);
-        postProyec.setUser(user);
         
-        proService.saveProyecto(postProyec);
         
-        return new ResponseEntity<>(postProyec, HttpStatus.OK);
+        return logicaService.crearProyecto(dao, user);
     }
     
     
     //Trae todos
     
     @GetMapping ("/proyecto/traer")
-    public List<Proyecto> getAllProyectos() {
+    public List<ProyectoDto> getAllProyectos() {
         
-        return proService.getAllProyectos();
+        return logicaService.traerDtos();
     }
     
     //Trae 1 por id
@@ -65,26 +69,23 @@ public class ProyectoController {
     //Elimina 1 por id
     
     @DeleteMapping ("/proyecto/delete/{id}")
-    public String deleteProyectoById(@PathVariable Long id) {
+    public ResponseEntity<Mensaje> deleteProyectoById(@PathVariable Long id) {
         
         proService.deleteProyectoById(id);
         
-        return "Proyecto elimanado";
+        return new ResponseEntity<>(new Mensaje("Proyecto eliminado"), HttpStatus.OK);
     }
     
     //Edita 1 por id 
     
     @PutMapping ("/proyecto/editar/{id}")
-    public ResponseEntity<Proyecto>editarProyecto(@PathVariable Long id,
-                                                @RequestParam String titulo) {
+    public ResponseEntity<Mensaje>editarProyecto(@PathVariable Long id,
+                                                @RequestBody ProyectoDao dao) {
         
         
         Proyecto editProyec = proService.getProyectoById(id);
-        editProyec.setTitulo(titulo);
-        
-        proService.saveProyecto(editProyec);
         
         
-        return new ResponseEntity<>(editProyec, HttpStatus.OK);
+        return logicaService.editarProyecto(editProyec, dao);
     }
 }
