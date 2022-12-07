@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 /* Controler de end point usuario */
 
 
-@CrossOrigin (origins = "http://localhost:8080")
+//@CrossOrigin (origins = "http://localhost:8080")
 // @RequestMapping ("/api")
 @RestController
 public class UsuarioController {

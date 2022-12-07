@@ -57,7 +57,7 @@ public class LogicaProyecto {
         proyecto.setTitulo(dao.getTitulo());
         proyecto.setImagen(dao.getImagen());
         proyecto.setVinculo_img(dao.getVinculo_img());
-        proyecto.setTitulo(dao.getSobre_proyecto());
+        proyecto.setSobre_proyecto(dao.getSobre_proyecto());
         
         proService.saveProyecto(proyecto);
         
