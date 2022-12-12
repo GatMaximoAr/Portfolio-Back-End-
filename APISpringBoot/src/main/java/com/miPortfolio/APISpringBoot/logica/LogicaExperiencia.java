@@ -9,7 +9,7 @@ import com.miPortfolio.APISpringBoot.dto.ExperienciaDto;
 import com.miPortfolio.APISpringBoot.model.ActividadExp;
 import com.miPortfolio.APISpringBoot.model.Experiencia;
 import com.miPortfolio.APISpringBoot.model.RelExpAct;
-import com.miPortfolio.APISpringBoot.model.Usuario;
+import com.miPortfolio.APISpringBoot.security.model.Usuario;
 import com.miPortfolio.APISpringBoot.service.ActividadExpService;
 import com.miPortfolio.APISpringBoot.service.RelExpActService;
 import com.miPortfolio.APISpringBoot.service.ExperienciaService;

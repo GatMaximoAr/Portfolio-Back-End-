@@ -4,8 +4,8 @@
  */
 package com.miPortfolio.APISpringBoot.controller;
 
-import com.miPortfolio.APISpringBoot.model.Usuario;
-import com.miPortfolio.APISpringBoot.service.UsuarioService;
+import com.miPortfolio.APISpringBoot.security.model.Usuario;
+import com.miPortfolio.APISpringBoot.security.service.UsuarioService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

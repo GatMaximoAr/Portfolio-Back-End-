@@ -1,6 +1,7 @@
 
 package com.miPortfolio.APISpringBoot.model;
 
+import com.miPortfolio.APISpringBoot.security.model.Usuario;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;

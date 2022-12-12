@@ -1,6 +1,7 @@
 
 package com.miPortfolio.APISpringBoot.model;
 
+import com.miPortfolio.APISpringBoot.security.model.Usuario;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;

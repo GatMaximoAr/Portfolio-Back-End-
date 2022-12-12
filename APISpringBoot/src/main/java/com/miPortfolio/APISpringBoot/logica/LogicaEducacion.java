@@ -7,7 +7,7 @@ package com.miPortfolio.APISpringBoot.logica;
 import com.miPortfolio.APISpringBoot.dao.EducacionDao;
 import com.miPortfolio.APISpringBoot.dto.EducacionDto;
 import com.miPortfolio.APISpringBoot.model.Educacion;
-import com.miPortfolio.APISpringBoot.model.Usuario;
+import com.miPortfolio.APISpringBoot.security.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.miPortfolio.APISpringBoot.service.EducacionService;

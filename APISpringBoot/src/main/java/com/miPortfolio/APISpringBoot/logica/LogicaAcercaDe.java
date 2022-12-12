@@ -7,7 +7,7 @@ package com.miPortfolio.APISpringBoot.logica;
 import com.miPortfolio.APISpringBoot.dao.AcercaDeDao;
 import com.miPortfolio.APISpringBoot.dto.AcercaDeDto;
 import com.miPortfolio.APISpringBoot.model.AcercaDe;
-import com.miPortfolio.APISpringBoot.model.Usuario;
+import com.miPortfolio.APISpringBoot.security.model.Usuario;
 import com.miPortfolio.APISpringBoot.service.AcercaDeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

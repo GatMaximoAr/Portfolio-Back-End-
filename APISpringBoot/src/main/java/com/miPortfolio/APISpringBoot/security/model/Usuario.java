@@ -1,7 +1,10 @@
 
-package com.miPortfolio.APISpringBoot.model;
+package com.miPortfolio.APISpringBoot.security.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.miPortfolio.APISpringBoot.model.Educacion;
+import com.miPortfolio.APISpringBoot.model.Experiencia;
+import com.miPortfolio.APISpringBoot.model.Proyecto;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.CascadeType;

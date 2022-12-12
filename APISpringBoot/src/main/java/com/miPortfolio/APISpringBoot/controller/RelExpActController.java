@@ -4,13 +4,14 @@
  */
 package com.miPortfolio.APISpringBoot.controller;
 
+import com.miPortfolio.APISpringBoot.security.service.UsuarioService;
 import com.miPortfolio.APISpringBoot.dao.ExperienciaDao;
 import com.miPortfolio.APISpringBoot.dto.ExperienciaDto;
 import com.miPortfolio.APISpringBoot.logica.LogicaExperiencia;
 import com.miPortfolio.APISpringBoot.model.ActividadExp;
 import com.miPortfolio.APISpringBoot.model.Experiencia;
 import com.miPortfolio.APISpringBoot.model.RelExpAct;
-import com.miPortfolio.APISpringBoot.model.Usuario;
+import com.miPortfolio.APISpringBoot.security.model.Usuario;
 import com.miPortfolio.APISpringBoot.service.*;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

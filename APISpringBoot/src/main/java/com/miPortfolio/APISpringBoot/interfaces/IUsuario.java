@@ -1,7 +1,7 @@
 
 package com.miPortfolio.APISpringBoot.interfaces;
 
-import com.miPortfolio.APISpringBoot.model.Usuario;
+import com.miPortfolio.APISpringBoot.security.model.Usuario;
 import java.util.List;
 
 /*interface Usuario metodos CRUD basicos*/

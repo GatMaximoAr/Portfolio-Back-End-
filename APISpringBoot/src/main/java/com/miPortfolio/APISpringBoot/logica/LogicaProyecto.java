@@ -7,7 +7,7 @@ package com.miPortfolio.APISpringBoot.logica;
 import com.miPortfolio.APISpringBoot.dao.ProyectoDao;
 import com.miPortfolio.APISpringBoot.dto.ProyectoDto;
 import com.miPortfolio.APISpringBoot.model.Proyecto;
-import com.miPortfolio.APISpringBoot.model.Usuario;
+import com.miPortfolio.APISpringBoot.security.model.Usuario;
 import com.miPortfolio.APISpringBoot.service.ProyectoService;
 import java.util.ArrayList;
 import java.util.List;
