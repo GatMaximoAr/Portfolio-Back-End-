@@ -9,5 +9,5 @@ package com.miPortfolio.APISpringBoot.security.enums;
  * @author maximo
  */
 public enum RolNombre {
-    
+    ROLE_ADMIN, ROLE_USER
 }

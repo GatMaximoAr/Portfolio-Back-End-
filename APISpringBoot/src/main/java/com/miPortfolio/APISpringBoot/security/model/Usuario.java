@@ -6,6 +6,7 @@ import com.miPortfolio.APISpringBoot.model.Educacion;
 import com.miPortfolio.APISpringBoot.model.Experiencia;
 import com.miPortfolio.APISpringBoot.model.Proyecto;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,8 +15,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.Getter;
@@ -37,12 +40,21 @@ public class Usuario implements Serializable{
     private Long id;
     
     /* Nombre de las columnas customizado*/
+    @Column (name = "usuario", unique = true, nullable = false)
+    private String nombreUsuario;
     
-    @Column (name = "name")
-    private String name;
     
-    @Column (name = "password")
+    @Column (name = "password", nullable = false)
     private String password;
+    
+    @Column(nullable = false)
+    private String email;
+    
+    @ManyToMany
+    @JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "rol_id"))
+    private Set<Rol> roles = new HashSet<>();
+    
     
     /* Relacion 1-1 con clase entidad "AcercaDe", (no fuciona como quisiera)  */
     
@@ -74,9 +86,11 @@ public class Usuario implements Serializable{
     
     public Usuario() {}
 
-    public Usuario(String name, String password) {
-        this.name = name;
+    public Usuario(String nombreUsuario, String password, String email) {
+        this.nombreUsuario = nombreUsuario;
         this.password = password;
+        this.email = email;
     }
+
     
 }
