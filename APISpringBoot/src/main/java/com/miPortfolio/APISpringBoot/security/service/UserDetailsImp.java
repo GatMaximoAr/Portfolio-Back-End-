@@ -4,10 +4,24 @@
  */
 package com.miPortfolio.APISpringBoot.security.service;
 
-/**
- *
- * @author maximo
- */
-public class UserDetailsImp {
+import com.miPortfolio.APISpringBoot.security.model.Usuario;
+import com.miPortfolio.APISpringBoot.security.model.UsuarioPrincipal;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserDetailsImp implements UserDetailsService{
+    
+    @Autowired UsuarioService userService;
+
+    @Override
+    public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {
+        Usuario usuario = userService.findByNombreUsuario(nombreUsuario).get();
+        
+        return UsuarioPrincipal.build(usuario);
+    }
     
 }

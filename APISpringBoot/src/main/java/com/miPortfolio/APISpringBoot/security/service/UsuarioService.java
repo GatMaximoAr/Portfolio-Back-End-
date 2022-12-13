@@ -8,6 +8,8 @@ import com.miPortfolio.APISpringBoot.interfaces.IUsuario;
 import com.miPortfolio.APISpringBoot.security.model.Usuario;
 import com.miPortfolio.APISpringBoot.security.repository.UsuarioRepository;
 import java.util.List;
+import java.util.Optional;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 
 @Service
+@Transactional
 public class UsuarioService implements IUsuario{
 
     @Autowired
@@ -41,6 +44,18 @@ public class UsuarioService implements IUsuario{
     public Usuario getUsuarioById(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                 "No se encontro el recurso solicitado"));
+    }
+    
+    public Optional<Usuario> findByNombreUsuario(String nombreUsuario) {
+        return repository.findByNombreUsuario(nombreUsuario);
+    }
+    
+    public boolean existsByNombreUsuario(String nombreUsuario) {
+        return repository.existsByNombreUsuario(nombreUsuario);
+    }
+    
+    public boolean existsByEmail(String email) {
+        return repository.existsByEmail(email);
     }
     
 }

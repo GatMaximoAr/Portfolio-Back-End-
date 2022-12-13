@@ -4,10 +4,16 @@
  */
 package com.miPortfolio.APISpringBoot.security.repository;
 
-/**
- *
- * @author maximo
- */
-public interface RolRepository {
+import com.miPortfolio.APISpringBoot.security.enums.RolNombre;
+import com.miPortfolio.APISpringBoot.security.model.Rol;
+import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+
+@Repository
+public interface RolRepository extends JpaRepository<Rol, Long>{
+    
+    Optional<Rol> findByRolNombre(RolNombre rolNombre);
     
 }
