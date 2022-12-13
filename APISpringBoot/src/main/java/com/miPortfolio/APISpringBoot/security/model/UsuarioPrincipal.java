@@ -4,7 +4,6 @@
  */
 package com.miPortfolio.APISpringBoot.security.model;
 
-import com.miPortfolio.APISpringBoot.security.enums.RolNombre;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
