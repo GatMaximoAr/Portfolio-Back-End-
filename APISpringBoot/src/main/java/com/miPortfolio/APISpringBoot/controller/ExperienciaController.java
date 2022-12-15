@@ -13,7 +13,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +35,7 @@ public class ExperienciaController {
     
     // Crea
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping ("/experiencia/usuario/{id}/crear")
     public ResponseEntity<Experiencia> saveExperiencias(@PathVariable Long id,
                                    @RequestBody Experiencia postExp) {
@@ -66,6 +67,7 @@ public class ExperienciaController {
     
     //Elimina 1 por id
     
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping ("/experiencia/delete/{id}")
     public ResponseEntity<Mensaje> deleteExpById(@PathVariable Long id) {
         
@@ -76,6 +78,7 @@ public class ExperienciaController {
     
     //Edita 1 por id 
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping ("/experiencia/editar/{id}")
     public ResponseEntity<Experiencia>editarExperiencia(@PathVariable Long id,
                                                 @RequestParam String img_experiencia,

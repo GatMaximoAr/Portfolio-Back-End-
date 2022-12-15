@@ -16,15 +16,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /* Controler de end point AcercaDe */
@@ -44,6 +43,7 @@ public class AcercaDeController {
     
     //Crea si no hay registros, else Mensaje
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping ("acerca/usuario/{id}/crear")
     public ResponseEntity<AcercaDeDto> saveUsuarios(@PathVariable Long id, @RequestBody AcercaDeDao dao) {
         
@@ -70,7 +70,7 @@ public class AcercaDeController {
     
     
     //edita 1 por id 
-    
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping ("/acerca/editar/{id}")
     public ResponseEntity<Mensaje> editAcercaDe(@PathVariable Long id,
                                                  @RequestBody AcercaDeDao dao) {
@@ -81,7 +81,7 @@ public class AcercaDeController {
         return logicaAcercaDe.editAcerca(dao, editAcerca);
     }
     
-    
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping ("/delete/acerca/{id}")
     public ResponseEntity<Mensaje> deleteAcercaDe(@PathVariable Long id) {
         

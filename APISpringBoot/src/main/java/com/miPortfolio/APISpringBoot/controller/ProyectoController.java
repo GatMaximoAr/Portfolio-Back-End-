@@ -16,14 +16,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -39,6 +38,7 @@ public class ProyectoController {
     
     // Crea
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping ("/proyecto/usuario/{id}/crear")
     public ResponseEntity<ProyectoDto> saveProyecto(@PathVariable Long id,
                                    @RequestBody ProyectoDao dao) {
@@ -68,6 +68,7 @@ public class ProyectoController {
     
     //Elimina 1 por id
     
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping ("/proyecto/delete/{id}")
     public ResponseEntity<Mensaje> deleteProyectoById(@PathVariable Long id) {
         
@@ -78,6 +79,7 @@ public class ProyectoController {
     
     //Edita 1 por id 
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping ("/proyecto/editar/{id}")
     public ResponseEntity<Mensaje>editarProyecto(@PathVariable Long id,
                                                 @RequestBody ProyectoDao dao) {

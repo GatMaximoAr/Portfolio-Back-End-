@@ -12,6 +12,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,7 +44,7 @@ public class ActividadExpController {
     
     /* Si no existe un registro de actividad lo crea y añade a la lista enlaszada
        en experiencia*/
-    
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping ("/actividad/exp/crear")
     public ResponseEntity<ActividadExp> saveActividadExps(//@PathVariable Long id
                                    @RequestBody ActividadExp postAct) {
@@ -101,6 +102,7 @@ public class ActividadExpController {
     
     /* Para borrar una actividad hay que eliminarla primero de la lista de Experiencia */
     
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping ("/actividades/delete/{id}")
     public String deleteActividadById(@PathVariable Long id) {
         
@@ -109,6 +111,7 @@ public class ActividadExpController {
         return "ActividadExp elimanado";
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping ("/delete/actividades/{id}/exp/{idExp}")
     public String deleteUserById(@PathVariable Long id,
                                  @PathVariable Long idExp) {
@@ -126,6 +129,7 @@ public class ActividadExpController {
     
     //Edita 1 por id 
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping ("/actividades/editar/{id}")
     public ResponseEntity<ActividadExp>editarActividadExp(@PathVariable Long id,
                                                 @RequestParam String actividad) {

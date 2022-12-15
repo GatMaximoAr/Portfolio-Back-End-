@@ -4,10 +4,16 @@
  */
 package com.miPortfolio.APISpringBoot.security.dto;
 
-/**
- *
- * @author maximo
- */
+import lombok.Getter;
+import lombok.Setter;
+
+
+
+@Getter @Setter
 public class LoginUsuario {
+    
+    private String nombreUsuario;
+    
+    private String password;
     
 }

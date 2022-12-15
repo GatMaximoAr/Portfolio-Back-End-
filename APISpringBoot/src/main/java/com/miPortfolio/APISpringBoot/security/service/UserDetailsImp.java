@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
+
 public class UserDetailsImp implements UserDetailsService{
     
     @Autowired UsuarioService userService;
@@ -21,7 +22,12 @@ public class UserDetailsImp implements UserDetailsService{
     public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {
         Usuario usuario = userService.findByNombreUsuario(nombreUsuario).get();
         
-        return UsuarioPrincipal.build(usuario);
+        UsuarioPrincipal principal = new UsuarioPrincipal(usuario.getNombreUsuario(),
+                usuario.getEmail(), usuario.getPassword());
+        
+        principal.build(usuario);
+        
+        return principal;
     }
     
 }

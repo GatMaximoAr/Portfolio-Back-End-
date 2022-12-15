@@ -4,10 +4,20 @@
  */
 package com.miPortfolio.APISpringBoot.security.dto;
 
-/**
- *
- * @author maximo
- */
+import java.util.HashSet;
+import java.util.Set;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
 public class NuevoUsuario {
+    private String nombreUsuario;
+    
+    private String email;
+    
+    private String password;
+    
+    private Set<String> roles = new HashSet<>();
+    
     
 }

@@ -17,7 +17,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +41,7 @@ public class RelExpActController {
     @Autowired private LogicaExperiencia loicaService;
     
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/relacion/exp/{id}/act/{ids}/crear")
     public ResponseEntity<RelExpAct> saveEntity(@PathVariable Long id,
                                                 @PathVariable Long ids) {
@@ -60,6 +61,7 @@ public class RelExpActController {
         return relacionService.findAllRelaciones();
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/relacioxp/usuario/{id}")
     public ResponseEntity<ExperienciaDto> crear(@RequestBody ExperienciaDao dao,
                                                @PathVariable Long id) {
@@ -75,7 +77,7 @@ public class RelExpActController {
         return loicaService.GetDtoRelacion();
     }
     
-    
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/relacioxp/editar/{id}")
     public ResponseEntity<ExperienciaDto> editar(@RequestBody ExperienciaDao dao,
                                                @PathVariable Long id) {
