@@ -84,13 +84,13 @@ public class AuthController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginUsuario.getNombreUsuario(), loginUsuario.getPassword()));
         
-        System.out.println(authentication.getName());
+        //System.out.println(authentication.getName());
         
         SecurityContextHolder.getContext().setAuthentication(authentication);
         
         String jwt = jwtProvider.generateToken(authentication);
       
-        System.out.println(jwt);
+        //System.out.println(jwt);
         
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         

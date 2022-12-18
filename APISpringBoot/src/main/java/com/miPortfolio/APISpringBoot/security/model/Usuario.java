@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.miPortfolio.APISpringBoot.model.Educacion;
 import com.miPortfolio.APISpringBoot.model.Experiencia;
 import com.miPortfolio.APISpringBoot.model.Proyecto;
+import com.miPortfolio.APISpringBoot.model.Skill;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -81,6 +82,13 @@ public class Usuario implements Serializable{
     @OneToMany (mappedBy = "user",
                 cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Proyecto> proyectos;
+    
+    /*Relacion uno a muchos con clase entity "Skill" */
+    
+    @JsonBackReference (value = "skills")
+    @OneToMany (mappedBy = "user",
+                cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Skill> skills;
     
     /* Costructores*/
     
