@@ -4,6 +4,8 @@
  */
 package com.miPortfolio.APISpringBoot.controller;
 
+import com.miPortfolio.APISpringBoot.dto.SkillDto;
+import com.miPortfolio.APISpringBoot.logica.LogicaSkill;
 import com.miPortfolio.APISpringBoot.logica.Mensaje;
 import com.miPortfolio.APISpringBoot.model.Skill;
 import com.miPortfolio.APISpringBoot.security.model.Usuario;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +30,7 @@ public class SkillController {
     
     @Autowired private SkillService skillService;
     @Autowired private UsuarioService UsuarioService;
+    @Autowired private LogicaSkill logicaSkill;
     
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/usuario/{id}/skill/crear")
@@ -67,7 +71,7 @@ public class SkillController {
     }
     
     @GetMapping("/skills/traer")
-    public List<Skill> getAllSkill() {
-        return skillService.getAllSkills();
+    public List<SkillDto> getAllSkill() {
+        return logicaSkill.listaSkills();
     }
 }
