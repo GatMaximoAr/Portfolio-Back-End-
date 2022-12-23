@@ -46,8 +46,9 @@ public class UsuarioService implements IUsuario{
                 "No se encontro el recurso solicitado"));
     }
     
-    public Optional<Usuario> findByNombreUsuario(String nombreUsuario) {
-        return repository.findByNombreUsuario(nombreUsuario);
+    public Usuario findByNombreUsuario(String nombreUsuario) {
+        return repository.findByNombreUsuario(nombreUsuario).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "No se encontro el recurso solicitado"));
     }
     
     public boolean existsByNombreUsuario(String nombreUsuario) {

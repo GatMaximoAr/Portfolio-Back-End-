@@ -45,9 +45,9 @@ public class AcercaDeController {
     
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping ("acerca/usuario/{id}/crear")
-    public ResponseEntity<AcercaDeDto> saveUsuarios(@PathVariable Long id, @RequestBody AcercaDeDao dao) {
+    public ResponseEntity<AcercaDeDto> saveUsuarios(@PathVariable String id, @RequestBody AcercaDeDao dao) {
         
-        Usuario user = serviceUsuario.getUsuarioById(id);
+        Usuario user = serviceUsuario.findByNombreUsuario(id);
         
         return logicaAcercaDe.crearAcerca(dao, user);
     }

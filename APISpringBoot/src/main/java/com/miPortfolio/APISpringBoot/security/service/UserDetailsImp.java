@@ -20,7 +20,7 @@ public class UserDetailsImp implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {
-        Usuario usuario = userService.findByNombreUsuario(nombreUsuario).get();
+        Usuario usuario = userService.findByNombreUsuario(nombreUsuario);
         
         UsuarioPrincipal principal = new UsuarioPrincipal(usuario.getNombreUsuario(),
                 usuario.getEmail(), usuario.getPassword());

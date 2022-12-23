@@ -11,6 +11,7 @@ import com.miPortfolio.APISpringBoot.service.EducacionService;
 import com.miPortfolio.APISpringBoot.security.service.UsuarioService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,10 +37,10 @@ public class EducacionController {
     
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping ("/educacion/usuario/{id}/crear")
-    public ResponseEntity<Mensaje> saveEducacion(@PathVariable Long id,
+    public ResponseEntity<Mensaje> saveEducacion(@PathVariable String id,
                                    @RequestBody EducacionDao dao) {
                                    
-        Usuario user = userService.getUsuarioById(id);
+        Usuario user = userService.findByNombreUsuario(id);
         
         
         return logicaEdu.crearItemEducacion(dao, user);
@@ -66,11 +67,11 @@ public class EducacionController {
     
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping ("/educacion/delete/{id}")
-    public String deleteEducacionById(@PathVariable Long id) {
+    public ResponseEntity<Mensaje> deleteEducacionById(@PathVariable Long id) {
         
         eduService.deleteEducacionById(id);
         
-        return "Educacion elimanado";
+        return new ResponseEntity<>(new Mensaje("educacion eliminada"), HttpStatus.OK);
     }
     
     //Edita 1 por id 

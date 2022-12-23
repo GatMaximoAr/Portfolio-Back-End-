@@ -64,9 +64,9 @@ public class RelExpActController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/relacioxp/usuario/{id}")
     public ResponseEntity<ExperienciaDto> crear(@RequestBody ExperienciaDao dao,
-                                               @PathVariable Long id) {
+                                               @PathVariable String id) {
     
-        Usuario user = userService.getUsuarioById(id);
+        Usuario user = userService.findByNombreUsuario(id);
         
         return loicaService.CreateAndSave(dao, user);
     }

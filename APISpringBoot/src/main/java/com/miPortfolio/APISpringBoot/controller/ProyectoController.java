@@ -40,10 +40,10 @@ public class ProyectoController {
     
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping ("/proyecto/usuario/{id}/crear")
-    public ResponseEntity<ProyectoDto> saveProyecto(@PathVariable Long id,
+    public ResponseEntity<ProyectoDto> saveProyecto(@PathVariable String id,
                                    @RequestBody ProyectoDao dao) {
                                    
-        Usuario user = userService.getUsuarioById(id);
+        Usuario user = userService.findByNombreUsuario(id);
         
         
         return logicaService.crearProyecto(dao, user);

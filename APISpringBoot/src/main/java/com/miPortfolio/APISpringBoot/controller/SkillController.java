@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,10 +32,10 @@ public class SkillController {
     @Autowired private LogicaSkill logicaSkill;
     
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/usuario/{id}/skill/crear")
-    public ResponseEntity<Mensaje> saveSkill(@PathVariable Long id, @RequestBody Skill skill) {
+    @PostMapping("/skill/usuario/{id}/crear")
+    public ResponseEntity<Mensaje> saveSkill(@PathVariable String id, @RequestBody Skill skill) {
         
-        Usuario user = UsuarioService.getUsuarioById(id);
+        Usuario user = UsuarioService.findByNombreUsuario(id);
         
         Skill newSkill = new Skill(skill.getTitulo(), skill.getPorcentaje(),
                 skill.getColor(), user);
