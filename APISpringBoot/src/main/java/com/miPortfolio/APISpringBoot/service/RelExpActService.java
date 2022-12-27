@@ -4,6 +4,7 @@
  */
 package com.miPortfolio.APISpringBoot.service;
 
+import com.miPortfolio.APISpringBoot.model.Experiencia;
 import com.miPortfolio.APISpringBoot.model.RelExpAct;
 import com.miPortfolio.APISpringBoot.model.RelExpActKey;
 import com.miPortfolio.APISpringBoot.repository.RelExpActRepository;
@@ -29,5 +30,9 @@ public class RelExpActService {
     public void deleteById(RelExpActKey key) {
         
         repostory.deleteById(key);
+    }
+    
+    public void deleteAllByExperiencia(Experiencia experiencia) {
+        repostory.deleteAllByExperiencia(experiencia);
     }
 }

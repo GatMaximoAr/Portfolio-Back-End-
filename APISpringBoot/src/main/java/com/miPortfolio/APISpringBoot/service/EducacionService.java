@@ -4,6 +4,7 @@ package com.miPortfolio.APISpringBoot.service;
 import com.miPortfolio.APISpringBoot.interfaces.IEducacion;
 import com.miPortfolio.APISpringBoot.model.Educacion;
 import com.miPortfolio.APISpringBoot.repository.EducacionRepository;
+import com.miPortfolio.APISpringBoot.security.model.Usuario;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,4 +44,8 @@ public class EducacionService implements IEducacion{
         //NO_CONTENT seria interesante de explorar
     }
     
+    
+    public List<Educacion> findAllByUser(Usuario user) {
+        return repository.findAllByUser(user);
+    }
 }

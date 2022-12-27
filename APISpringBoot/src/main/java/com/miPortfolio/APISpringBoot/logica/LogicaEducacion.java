@@ -39,6 +39,24 @@ public class LogicaEducacion {
         return listDto;
     }
     
+    public List<EducacionDto> getFormacionesUsuario(Usuario user) {
+        
+        List<EducacionDto> listaDto = new ArrayList<>();
+        
+        List<Educacion> listaProyecto = eduService.findAllByUser(user);
+        
+        for (Educacion formacion : listaProyecto) {
+            
+            EducacionDto dto = new EducacionDto(formacion.getId(),
+                    formacion.getTitulo_des(), formacion.getImagen(), formacion.getVinculo_img(),
+                    formacion.getSobre_educacion());
+            
+            listaDto.add(dto);
+        }
+        
+        return listaDto;
+    }
+    
     public ResponseEntity<Mensaje> crearItemEducacion(EducacionDao dao, Usuario user) {
         
         Educacion NuevaEdu = new Educacion(dao.getTitulo_des(), dao.getImagen(),

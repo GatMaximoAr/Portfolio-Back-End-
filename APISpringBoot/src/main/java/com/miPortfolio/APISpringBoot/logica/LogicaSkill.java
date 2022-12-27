@@ -5,6 +5,8 @@
 package com.miPortfolio.APISpringBoot.logica;
 
 import com.miPortfolio.APISpringBoot.dto.SkillDto;
+import com.miPortfolio.APISpringBoot.model.Skill;
+import com.miPortfolio.APISpringBoot.security.model.Usuario;
 import com.miPortfolio.APISpringBoot.service.SkillService;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,23 @@ public class LogicaSkill {
             
             listaDto.add(dto);
         });
+        
+        return listaDto;
+    }
+    
+    public List<SkillDto> getSkillsUsuario(Usuario user) {
+        
+        List<SkillDto> listaDto = new ArrayList<>();
+        
+        List<Skill> listaSkill = skillService.findAllByUser(user);
+        
+        for (Skill skill : listaSkill) {
+            
+            SkillDto dto = new SkillDto(skill.getId(), skill.getTitulo(), skill.getPorcentaje(),
+            skill.getColor());
+            
+            listaDto.add(dto);
+        }
         
         return listaDto;
     }

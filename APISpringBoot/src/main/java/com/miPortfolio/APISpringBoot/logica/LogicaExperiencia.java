@@ -49,7 +49,7 @@ public class LogicaExperiencia {
             
             if (!actService.existByActividad(actividad)) {
                     
-                System.out.println("aca no entro");
+                System.out.println("si la acitividad no existe, la crea y genera la relacion ");
                     ActividadExp nuevaAct = new ActividadExp(actividad);
                     
                     actService.saveActividadExp(nuevaAct);
@@ -61,6 +61,8 @@ public class LogicaExperiencia {
                     expDto.addActividad(actividad);
                     
                 }else if (actService.existByActividad(actividad)) {
+                    
+                    System.out.println("si la acitividad existe, solo genera la relacion ");
                     
                     ActividadExp act = actService.findByActividad(actividad);
             
@@ -106,73 +108,94 @@ public class LogicaExperiencia {
     
     public ResponseEntity<ExperienciaDto> editaExpRelacion(Experiencia experiencia, ExperienciaDao dao) {
         
-        List<RelExpAct> relaciones = relacion.findAllRelaciones();
+        relacion.deleteAllByExperiencia(experiencia);
         
-        for (RelExpAct relacione : relaciones) {
-            
-            if (Objects.equals(relacione.getId().getUsuarioId(), experiencia.getUser().getId()) 
-                    && Objects.equals(relacione.getId().getExperienciaId(), experiencia.getId())) {
-                
-                relacion.deleteById(relacione.getId());
-            }
-        }
         
-        Experiencia exp = experiencia;
-        
-        exp.setImg_experiencia(dao.getImg_experiencia());
-        exp.setImg_href(dao.getImg_href());
-        exp.setSobre_experiencia(dao.getSobre_experiencia());
+        experiencia.setImg_experiencia(dao.getImg_experiencia());
+        experiencia.setImg_href(dao.getImg_href());
+        experiencia.setSobre_experiencia(dao.getSobre_experiencia());
         
         expService.saveExperiencia(experiencia);
         
-        ExperienciaDto expDto = new ExperienciaDto(exp.getId(), exp.getImg_experiencia(), exp.getImg_href(),
-        exp.getSobre_experiencia());
+        ExperienciaDto expDto = new ExperienciaDto(experiencia.getId(), experiencia.getImg_experiencia(),
+                experiencia.getImg_href(),experiencia.getSobre_experiencia());
         
         
         for (String actividad : dao.getActividad()) {
-             //List<String> listaAct = new ArrayList<>();
-            
-            
+             
             if (!actService.existByActividad(actividad)) {
                     
+                System.out.println("si la acitividad no existe, la crea y genera la relacion ");
                     ActividadExp nuevaAct = new ActividadExp(actividad);
                     
                     actService.saveActividadExp(nuevaAct);
                     
-                    RelExpAct rel = new RelExpAct(exp, nuevaAct);
+                    RelExpAct rel = new RelExpAct(experiencia, nuevaAct);
                     
                     relacion.saveRelacion(rel);
                     
                     expDto.addActividad(actividad);
                     
-                }else {
+                }else if (actService.existByActividad(actividad)) {
+                    
+                    System.out.println("si la acitividad existe, solo genera la relacion ");
+                    
+                    ActividadExp act = actService.findByActividad(actividad);
             
-            for (RelExpAct relacionItem : relaciones) {
-                
-               ActividadExp act = actService.findByActividad(actividad);
-               
-                if (!relacionItem.getId().equals(new RelExpAct(exp, act).getId())) {
+                    RelExpAct rel = new RelExpAct(experiencia, act);
                     
-                    //System.out.println(relacionItem.getId().equals(new RelExpAct(exp, act).getId()));
+                    relacion.saveRelacion(rel);
                     
-                    if (!Objects.equals(relacionItem.getId().getActividadId(), act.getId()) || !Objects.equals(relacionItem.getId().getExperienciaId(), exp.getId())) {
-                        
-                       RelExpAct rel = new RelExpAct(exp, act);
-                    
-                        relacion.saveRelacion(rel);
-                    }
-                }
-             expDto.addActividad(actividad);
+                    expDto.addActividad(actividad);
+            
             }
-
-            }
-            //listaAct.add(actividad); // metodo add
-        //expDto.setActividad(listaAct);    
         }
         
         
         return new ResponseEntity<>(expDto, HttpStatus.CREATED);
         
         
+    }
+    
+    public List<ExperienciaDto> getRelacionXpUsuario(Usuario user) {
+        
+        List<Experiencia> listaExp = this.relaciones_usuario(user);
+        
+        List<ExperienciaDto> listaDto = new ArrayList<>();
+        
+        for (Experiencia experiencia : listaExp) {
+            
+            //System.out.println(experiencia.getUser().getNombreUsuario());
+            
+            ExperienciaDto expDto = new ExperienciaDto(experiencia.getId(),
+                    experiencia.getImg_experiencia(), experiencia.getImg_href(),
+                    experiencia.getSobre_experiencia());
+            
+            for (RelExpAct relacion : experiencia.getRelaciones()) {
+                
+                ActividadExp act = actService.getActividadExpById(relacion.getId().getActividadId());
+                expDto.addActividad(act.getActividad());
+            }
+            listaDto.add(expDto);
+        }
+
+        return listaDto;
+    }
+    
+    public List<Experiencia> relaciones_usuario(Usuario user) {
+        
+        List<Experiencia> listaRetorno = new ArrayList<>();
+        List<Experiencia> listaExperiencias = expService.getAllExperiencias();
+        
+        for (Experiencia experiencia : listaExperiencias) {
+            
+            if (Objects.equals(experiencia.getUser().getId(), user.getId())) {
+                
+                //System.out.println(experiencia.getUser().getNombreUsuario());
+                
+                listaRetorno.add(experiencia);
+            }
+        }
+        return listaRetorno;
     }
 }

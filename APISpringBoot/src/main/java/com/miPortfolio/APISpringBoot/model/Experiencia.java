@@ -2,8 +2,6 @@
 package com.miPortfolio.APISpringBoot.model;
 
 import com.miPortfolio.APISpringBoot.security.model.Usuario;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -14,8 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -23,6 +19,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 
+//@Transactional
 @Getter @Setter
 @Entity
 //proximo inicio de 0 BD custimizar table name
@@ -86,6 +83,16 @@ public class Experiencia implements Serializable{
         this.img_href = img_href;
         this.sobre_experiencia = sobre_experiencia;
         this.user = user;
-    }  
+    } 
+
+    public Experiencia(Long id, String img_experiencia, String img_href, String sobre_experiencia, Usuario user) {
+        this.id = id;
+        this.img_experiencia = img_experiencia;
+        this.img_href = img_href;
+        this.sobre_experiencia = sobre_experiencia;
+        this.user = user;
+    }
+    
+    
     
 }

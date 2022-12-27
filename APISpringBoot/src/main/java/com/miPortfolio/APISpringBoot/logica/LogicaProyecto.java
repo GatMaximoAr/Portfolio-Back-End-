@@ -52,6 +52,24 @@ public class LogicaProyecto {
         return listaDto;
     }
     
+    public List<ProyectoDto> getProyectosUsuario(Usuario user) {
+        
+        List<ProyectoDto> listaDto = new ArrayList<>();
+        
+        List<Proyecto> listaProyecto = proService.findAllByUser(user);
+        
+        for (Proyecto proyecto : listaProyecto) {
+            
+            ProyectoDto dto = new ProyectoDto(proyecto.getId(),
+                    proyecto.getTitulo(), proyecto.getImagen(), proyecto.getVinculo_img(),
+                    proyecto.getSobre_proyecto());
+            
+            listaDto.add(dto);
+        }
+        
+        return listaDto;
+    }
+    
     public ResponseEntity<Mensaje> editarProyecto(Proyecto proyecto, ProyectoDao dao) {
         
         proyecto.setTitulo(dao.getTitulo());

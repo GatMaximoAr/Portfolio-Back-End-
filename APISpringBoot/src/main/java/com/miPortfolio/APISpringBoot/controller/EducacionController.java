@@ -55,6 +55,14 @@ public class EducacionController {
         return logicaEdu.getListEducacion();
     }
     
+    @GetMapping("/formaciones/{usuario}/traer")
+    public List<EducacionDto> getformaciones(@PathVariable String usuario) {
+        
+        Usuario user = userService.findByNombreUsuario(usuario);
+        
+        return logicaEdu.getFormacionesUsuario(user);
+    }
+    
     //Trae 1 por id
     
     @GetMapping ("/educacion/{id}/traer")

@@ -54,10 +54,12 @@ public class AcercaDeController {
     
     //Trae todos
     
-    @GetMapping ("/acerca/usuario/traer")
-    public List<AcercaDe> getAllUsuarios() {
+    @GetMapping ("/acerca/{usuario}/")
+    public AcercaDeDto getAllUsuarios(@PathVariable String usuario) {
         
-        return serviceAcerca.getAllAcercaDe();
+        Usuario user = serviceUsuario.findByNombreUsuario(usuario);
+        
+        return logicaAcercaDe.getUserAcerca(user);
     }
     
     //trae 1 por id

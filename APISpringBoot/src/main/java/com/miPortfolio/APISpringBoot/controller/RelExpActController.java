@@ -38,7 +38,7 @@ public class RelExpActController {
     
     @Autowired private ActividadExpService actService;
     
-    @Autowired private LogicaExperiencia loicaService;
+    @Autowired private LogicaExperiencia logicaService;
     
     
     @PreAuthorize("hasRole('ADMIN')")
@@ -68,13 +68,21 @@ public class RelExpActController {
     
         Usuario user = userService.findByNombreUsuario(id);
         
-        return loicaService.CreateAndSave(dao, user);
+        return logicaService.CreateAndSave(dao, user);
     }
     
     @GetMapping("/relacionxp/traer")
     public List<ExperienciaDto> traerDtoRelaciones() {
         
-        return loicaService.GetDtoRelacion();
+        return logicaService.GetDtoRelacion();
+    }
+    
+    @GetMapping("/relacionxp/{usuario}/traer")
+    public List<ExperienciaDto> getRelacionUsuario(@PathVariable String usuario) {
+        
+        Usuario user = userService.findByNombreUsuario(usuario);
+        
+        return logicaService.getRelacionXpUsuario(user);
     }
     
     @PreAuthorize("hasRole('ADMIN')")
@@ -84,7 +92,7 @@ public class RelExpActController {
     
         Experiencia experiencia = expService.getExperienciaById(id);
         
-        return loicaService.editaExpRelacion(experiencia, dao);
+        return logicaService.editaExpRelacion(experiencia, dao);
     }
     
     

@@ -34,6 +34,17 @@ public class LogicaAcercaDe {
         return new ResponseEntity<>(acercaDto, HttpStatus.CREATED);
     }
     
+    public AcercaDeDto getUserAcerca(Usuario user) {
+        
+        AcercaDe acerca = acercaService.getAcercaDeById(user.getId());
+        
+        AcercaDeDto dto =  new AcercaDeDto(acerca.getNombre_usuario(),
+                acerca.getApellido_usuario(), acerca.getImagen(),
+                acerca.getSobre_usuario(), acerca.getOcupacion(), acerca.getImg_portada());
+        
+        return dto;
+    }
+    
     public ResponseEntity<Mensaje> editAcerca(AcercaDeDao dao, AcercaDe acercaDe) {
         
      acercaDe.setNombre_usuario(dao.getNombre_usuario());

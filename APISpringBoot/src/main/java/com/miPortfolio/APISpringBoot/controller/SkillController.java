@@ -73,4 +73,12 @@ public class SkillController {
     public List<SkillDto> getAllSkill() {
         return logicaSkill.listaSkills();
     }
+    
+    @GetMapping("/skills/{usuario}/traer")
+    public List<SkillDto> getSkillsUsuario(@PathVariable String usuario) {
+        
+        Usuario user = UsuarioService.findByNombreUsuario(usuario);
+        
+        return logicaSkill.getSkillsUsuario(user);
+    }
 }

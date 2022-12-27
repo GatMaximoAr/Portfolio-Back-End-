@@ -66,6 +66,14 @@ public class ProyectoController {
         return proService.getProyectoById(id);
     }
     
+    @GetMapping("/proyectos/{usuario}/traer")
+    public List<ProyectoDto> getProyectosUsuario(@PathVariable String usuario) {
+        
+        Usuario user = userService.findByNombreUsuario(usuario);
+        
+        return logicaService.getProyectosUsuario(user);
+    }
+    
     //Elimina 1 por id
     
     @PreAuthorize("hasRole('ADMIN')")
