@@ -27,7 +27,7 @@ public class LogicaAcercaDe {
         
         acercaService.saveAcercaDe(newAcerca);
         
-        AcercaDeDto acercaDto = new AcercaDeDto(newAcerca.getNombre_usuario(), newAcerca.getApellido_usuario(),
+        AcercaDeDto acercaDto = new AcercaDeDto(newAcerca.getId(), newAcerca.getNombre_usuario(), newAcerca.getApellido_usuario(),
                 newAcerca.getImagen(), newAcerca.getSobre_usuario(), newAcerca.getOcupacion(),
                 newAcerca.getImg_portada());
         
@@ -38,7 +38,7 @@ public class LogicaAcercaDe {
         
         AcercaDe acerca = acercaService.getAcercaDeById(user.getId());
         
-        AcercaDeDto dto =  new AcercaDeDto(acerca.getNombre_usuario(),
+        AcercaDeDto dto =  new AcercaDeDto(acerca.getId(), acerca.getNombre_usuario(),
                 acerca.getApellido_usuario(), acerca.getImagen(),
                 acerca.getSobre_usuario(), acerca.getOcupacion(), acerca.getImg_portada());
         

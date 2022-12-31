@@ -10,6 +10,8 @@ import lombok.Setter;
 @Getter @Setter
 public class AcercaDeDto {
     
+    private Long id;
+    
     private String nombre_usuario;
     
     private String apellido_usuario;
@@ -26,7 +28,8 @@ public class AcercaDeDto {
     public AcercaDeDto() {
     }
 
-    public AcercaDeDto(String nombre_usuario, String apellido_usuario, String imagen, String sobre_usuario, String ocupacion, String img_portada) {
+    public AcercaDeDto(Long id, String nombre_usuario, String apellido_usuario, String imagen, String sobre_usuario, String ocupacion, String img_portada) {
+        this.id = id;
         this.nombre_usuario = nombre_usuario;
         this.apellido_usuario = apellido_usuario;
         this.imagen = imagen;
@@ -34,6 +37,8 @@ public class AcercaDeDto {
         this.ocupacion = ocupacion;
         this.img_portada = img_portada;
     }
+
+    
     
     
 }
