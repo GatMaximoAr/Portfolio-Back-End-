@@ -12,7 +12,6 @@ import com.miPortfolio.APISpringBoot.service.AcercaDeService;
 import com.miPortfolio.APISpringBoot.model.AcercaDe;
 import com.miPortfolio.APISpringBoot.security.model.Usuario;
 import com.miPortfolio.APISpringBoot.security.service.UsuarioService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
